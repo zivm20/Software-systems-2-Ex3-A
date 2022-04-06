@@ -4,7 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 
-using namespace ziv;
+using namespace zich;
 using namespace std;
 vector<vector<double>> Matrix::genMatrix(const vector<double>& vals, int r, int c){
     vector<vector<double>> mat;
@@ -22,7 +22,7 @@ Matrix::Matrix(const std::vector<double>& vals, int r, int c): matrix(genMatrix(
 }
 
 
-ostream& ziv::operator<<(std::ostream& output, const Matrix& mat){
+ostream& zich::operator<<(std::ostream& output, const Matrix& mat){
     for(size_t i = 0; i<mat.rows; i++){
         string row;
         for(size_t j = 0; j<mat.cols; j++){
@@ -36,7 +36,7 @@ ostream& ziv::operator<<(std::ostream& output, const Matrix& mat){
     return output;
 }
 
-Matrix ziv::operator+(Matrix lMat, const Matrix& rMat){
+Matrix zich::operator+(Matrix lMat, const Matrix& rMat){
     lMat += rMat;
     return lMat;
 }
@@ -52,7 +52,7 @@ Matrix& Matrix::operator+=(const Matrix& rMat){
 }
 
 
-Matrix ziv::operator-(Matrix lMat, const Matrix& rMat){
+Matrix zich::operator-(Matrix lMat, const Matrix& rMat){
     lMat -= rMat;
     return lMat;
 }
@@ -65,7 +65,7 @@ Matrix& Matrix::operator-=(const Matrix& rMat){
     applyOnEach(rMat,MatCellSubtraction);
     return *this;
 }
-Matrix ziv::operator-(Matrix mat){
+Matrix zich::operator-(Matrix mat){
     mat*=-1;
     return mat;
 }
@@ -131,11 +131,11 @@ Matrix Matrix::operator--(int){
     return temp;
 }
 
-Matrix ziv::operator*(Matrix lMat, double scalar){
+Matrix zich::operator*(Matrix lMat, double scalar){
     lMat*=scalar;
     return lMat;
 }
-Matrix ziv::operator*(double scalar,Matrix rMat){
+Matrix zich::operator*(double scalar,Matrix rMat){
     rMat*=scalar;
     return rMat;
 }
@@ -148,7 +148,7 @@ Matrix& Matrix::operator*=(double scalar){
     return *this;
 }
 
-Matrix ziv::operator*(Matrix lMat, const Matrix& rMat){
+Matrix zich::operator*(Matrix lMat, const Matrix& rMat){
     lMat*=rMat;
     return lMat;
 }

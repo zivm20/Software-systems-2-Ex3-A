@@ -1,6 +1,6 @@
 #include "doctest.h"
 #include "Matrix.hpp"
-using namespace ziv;
+using namespace zich;
 
 #include <string>
 #include <algorithm>

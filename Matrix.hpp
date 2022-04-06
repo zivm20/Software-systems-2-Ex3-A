@@ -4,7 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 
-namespace ziv{
+namespace zich{
     class Matrix{
         private:
             std::vector<std::vector<double>> matrix;
