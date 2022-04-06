@@ -66,6 +66,7 @@ namespace ziv{
             //<< operator
             friend std::ostream& operator<<(std::ostream& output, const Matrix& mat);
             //>> operator
+            //not implemented yet
             friend std::istream& operator>>(std::istream& input, Matrix& mat);
             
 

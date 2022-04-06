@@ -57,7 +57,7 @@ Matrix ziv::operator-(Matrix lMat, const Matrix& rMat){
     return lMat;
 }
 Matrix& Matrix::operator-=(const Matrix& rMat){
-
+    //for each cell i,j in mat 1 subtract the value in cel i,j of mat 2
     auto MatCellSubtraction = [](const Matrix& mat1,const Matrix& mat2,size_t i, size_t j){
         return mat1.get(i,j)-mat2.get(i,j);
     };
@@ -101,6 +101,7 @@ bool Matrix::operator>=(const Matrix& rMat) const{
 }
           
 Matrix& Matrix::operator++(){
+    //increment each value by amount, in this case 1
     auto increment = [](const Matrix& mat1,double amount,size_t i, size_t j){
         return mat1.get(i,j)+amount;
     };
@@ -113,7 +114,6 @@ Matrix Matrix::operator++(int){
     Matrix temp = *this;
     operator++();
     return temp;
-
 }
 Matrix& Matrix::operator--(){
     //decrement each value by 1
