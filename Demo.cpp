@@ -35,18 +35,24 @@ int main() {
   /* prints [-1 0 0]
             [0 -1 0]
             [0 0 -1]*/
-  //cout << (3*a) << endl;
+  cout << (3*a) << endl;
   /* prints [3 0 0]
             [0 3 0]
             [0 0 3]*/
 
   Matrix b{arr, 3, 3};
-  //a *= -3;
+  a *= -3;
   cout << (a+b) << endl;  // prints the 0 matrix
   cout << (b-a) << endl;
   /* prints [6 0 0]
             [0 6 0]
             [0 0 6]*/
+  cout << (a*b) << endl;
+  cout << a << endl;
+  cout << b << endl;
+  a*=a;
+  cout << a << endl;
+  cout << b << endl;
 
   cout << "End of demo!" << endl;
   return 0;

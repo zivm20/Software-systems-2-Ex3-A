@@ -18,8 +18,7 @@ test: TestCounter.o Test.o $(OBJECTS)
 tidy:
 	clang-tidy $(SOURCES) -extra-arg=-std=c++2a -checks=bugprone-*,clang-analyzer-*,cppcoreguidelines-*,performance-*,portability-*,readability-*,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-owning-memory --warnings-as-errors=-* --
 
-Matrix.o: Matrix.cpp Matrix.hpp
-	$(CXX) $(CXXFLAGS) --compile $< -o $@
+
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
 

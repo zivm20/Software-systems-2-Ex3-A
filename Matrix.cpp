@@ -6,7 +6,7 @@
 
 using namespace ziv;
 using namespace std;
-vector<vector<double>> Matrix::genMatrix(vector<double> vals, int r, int c){
+vector<vector<double>> Matrix::genMatrix(const vector<double>& vals, int r, int c){
     vector<vector<double>> mat;
     for(size_t i = 0; i < r; i++){
         vector<double> row;
@@ -18,14 +18,15 @@ vector<vector<double>> Matrix::genMatrix(vector<double> vals, int r, int c){
     return mat;
 }
 
+Matrix::Matrix(const std::vector<double>& vals, int r, int c): matrix(genMatrix(vals,r,c)), rows(r), cols(c){
+}
 
-Matrix::Matrix(std::vector<double> v, int r, int c): matrix(genMatrix(v,r,c)), rows(r), cols(c){}
 
 ostream& ziv::operator<<(std::ostream& output, const Matrix& mat){
     for(size_t i = 0; i<mat.rows; i++){
         string row;
         for(size_t j = 0; j<mat.cols; j++){
-            row = row + to_string(mat.get(i,j));
+            row += to_string(mat.get(i,j));
             if(j < mat.cols-1){
                 row.push_back(' ');
             }
@@ -108,13 +109,14 @@ Matrix& Matrix::operator++(){
     return *this;
 }
 
-const Matrix Matrix::operator++(int){
+Matrix Matrix::operator++(int){
     Matrix temp = *this;
     operator++();
     return temp;
 
 }
 Matrix& Matrix::operator--(){
+    //decrement each value by 1
     auto decrement = [](const Matrix& mat1,double amount,size_t i, size_t j){
         return mat1.get(i,j)-amount;
     };
@@ -123,7 +125,7 @@ Matrix& Matrix::operator--(){
     return *this;
 }
 
-const Matrix Matrix::operator--(int){
+Matrix Matrix::operator--(int){
     Matrix temp = *this;
     operator--();
     return temp;
@@ -133,11 +135,12 @@ Matrix ziv::operator*(Matrix lMat, double scalar){
     lMat*=scalar;
     return lMat;
 }
-Matrix ziv::operator*(double scalar,Matrix lMat){
-    lMat*=scalar;
-    return lMat;
+Matrix ziv::operator*(double scalar,Matrix rMat){
+    rMat*=scalar;
+    return rMat;
 }
 Matrix& Matrix::operator*=(double scalar){
+    //multiply each value by scalar
     auto mult = [](const Matrix& mat1,double s,size_t i, size_t j){
             return mat1.get(i,j)*s;
     };
@@ -152,8 +155,25 @@ Matrix ziv::operator*(Matrix lMat, const Matrix& rMat){
 
 
 Matrix& Matrix::operator*=(const Matrix& rMat){
-    
-    
+    if(getCols() != rMat.getRows()){
+        throw std::invalid_argument("Invalid matrix multiplication");
+    }
+    //we cant change our original matrix since rMat might be a refernce to this matrix
+    int newCols = rMat.getCols();
+    int newRows = getRows();
+    vector<double> vars;
+    //standard matrix multiplication
+    for(size_t i = 0; i < getRows(); i++){
+        for(size_t j = 0; j < rMat.getCols(); j++){
+            vars.push_back(0);
+            for(size_t k = 0; k < getCols(); k++){
+                vars[size_t(newCols)*i + j] += get(i,k)*rMat.get(k,j);
+            }
+        }
+    }
+    //now that we are done with the calculations, we can update our matrix
+    Matrix temp{vars, newRows, newCols};
+    *this = temp;
     return *this;
 }
 

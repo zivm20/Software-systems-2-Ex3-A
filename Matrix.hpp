@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include <string>
-//#include <ostream>
 #include <iostream>
 #include <stdexcept>
 
@@ -11,13 +10,11 @@ namespace ziv{
             std::vector<std::vector<double>> matrix;
             int rows;
             int cols;
-            static std::vector<std::vector<double>> genMatrix(std::vector<double> vals, int r, int c);
+            static std::vector<std::vector<double>> genMatrix(const std::vector<double>& vals, int r, int c);
             
         public:
-            Matrix(std::vector<double> vals, int r, int c);
             
-            //copy ctor
-            //Matrix(const Matrix& mat);
+            Matrix(const std::vector<double>& vals, int r, int c);
 
             //mat + mat
             friend Matrix operator+(Matrix lMat, const Matrix& rMat);
@@ -28,11 +25,7 @@ namespace ziv{
                 return *this;
             }
             //mat - mat
-            friend Matrix operator-(Matrix lMat, const Matrix& rMat);//{
-                //we pass lMat by value so we dont mind decrementing it
-                //lMat -= rMat;
-                //return lMat;
-            //}
+            friend Matrix operator-(Matrix lMat, const Matrix& rMat);
             //-= operator
             Matrix& operator-=(const Matrix& rMat);
             //unary - operator
@@ -54,11 +47,11 @@ namespace ziv{
             //++mat operator
             Matrix& operator++();
             //mat++ operator
-            const Matrix operator++(int);
+            Matrix operator++(int);
             //--mat operator
             Matrix& operator--();
             //mat-- operator
-            const Matrix operator--(int);
+            Matrix operator--(int);
             
             //mat * scalar
             friend Matrix operator*(Matrix lMat, double scalar);
@@ -108,7 +101,7 @@ namespace ziv{
                 }
             }
 
-
+            //compute sum of matrix
             double sum() const{
                 double sum = 0;
                 for(size_t i = 0; i<rows; i++){

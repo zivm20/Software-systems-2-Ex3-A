@@ -92,11 +92,13 @@ TEST_CASE("boolean logic and increment") {
     };
     std::vector<double> arr2 = {4, 0, 0, 0, 4, 0, 0, 0, 4};
     std::vector<double> arr3 = {5, 0, 0, 0, 5, 0, 0, 0, 5};
+    std::vector<double> addition= {0, 1, 1, 1, 0, 1, 1, 1, 0};
 	Matrix a{identity, 3, 3};
     Matrix a2{identity, 3, 3};
     Matrix b{arr, 4, 4};
-    Matrix c{arr2, 4, 4};
-    Matrix d{arr3, 4, 4};
+    Matrix c{arr2, 3,3};
+    Matrix d{arr3, 3, 3};
+    Matrix add{addition, 3, 3};
     CHECK(a<b);
     CHECK(a<=b);
     CHECK(b>a);
@@ -113,6 +115,7 @@ TEST_CASE("boolean logic and increment") {
     CHECK(a<=a2);
     CHECK(a>=a2);
     CHECK(a*4==c);
+    d+=add;
     CHECK(c != d);
     CHECK(c++ != d);
     CHECK(c == d);
@@ -122,13 +125,13 @@ TEST_CASE("boolean logic and increment") {
 }
 TEST_CASE("multiplication") {
     std::vector<double> ans1 = {
-    3, 0, 0,
-    0, 3, 0,
+    9, 0, 0,
+    0, 9, 0,
     0, 0, 0
     };
     std::vector<double> ans2 = {
-    3, 0,
-    0, 3
+    9, 0,
+    0, 9
     };
     std::vector<double> arr1 = {
     3, 0,  
@@ -144,6 +147,16 @@ TEST_CASE("multiplication") {
     0, 3, 0,
     0, 0, 3
     };
+    std::vector<double> arr4 = {
+    -3, 0, 0,
+    0, -3, 0,
+    0, 0, -3
+    };
+    std::vector<double> arr5 = {
+    9, 0, 0,
+    0, 9, 0,
+    0, 0, 9
+    };
     std::vector<double> identity = {
     1, 0, 0,
     0, 1, 0,
@@ -158,6 +171,8 @@ TEST_CASE("multiplication") {
     Matrix c{arr3, 3, 3};
     Matrix id{identity, 3, 3};
     Matrix id2{identity, 3, 3};
+    Matrix d{arr4, 3, 3};
+    Matrix dd{arr5, 3, 3};
     CHECK(b1*b2==a1);
     CHECK(b2*b1==a2);
     CHECK(b2_temp != a2);
@@ -174,6 +189,8 @@ TEST_CASE("multiplication") {
     CHECK(id*5==2.2*id+2.8*id);
     CHECK(-id*5<id);
 
+    d*=d;
+    CHECK(d==dd);
 
     
     
