@@ -15,7 +15,7 @@
 using namespace std;
 
 #include "Matrix.hpp"
-using namespace ziv;
+using namespace zich;
 
 int main() {
   
@@ -26,10 +26,6 @@ int main() {
   /* prints [1 0 0]
             [0 1 0]
             [0 0 1]*/
-  cout << a++ << endl;
-  cout << a-- << endl;
-  cout << ++a << endl;
-  cout << --a << endl;
 
   cout << (-a) << endl;
   /* prints [-1 0 0]
@@ -47,12 +43,6 @@ int main() {
   /* prints [6 0 0]
             [0 6 0]
             [0 0 6]*/
-  cout << (a*b) << endl;
-  cout << a << endl;
-  cout << b << endl;
-  a*=a;
-  cout << a << endl;
-  cout << b << endl;
 
   cout << "End of demo!" << endl;
   return 0;
