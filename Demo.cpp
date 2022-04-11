@@ -43,7 +43,9 @@ int main() {
   /* prints [6 0 0]
             [0 6 0]
             [0 0 6]*/
-
+  Matrix c; 
+  cin >> c;
+  cout << c;
   cout << "End of demo!" << endl;
   return 0;
 }

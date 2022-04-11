@@ -15,6 +15,7 @@ namespace zich{
         public:
             
             Matrix(const std::vector<double>& vals, int r, int c);
+            Matrix();
 
             //mat + mat
             friend Matrix operator+(Matrix lMat, const Matrix& rMat);

@@ -20,7 +20,8 @@ vector<vector<double>> Matrix::genMatrix(const vector<double>& vals, int r, int 
 
 Matrix::Matrix(const std::vector<double>& vals, int r, int c): matrix(genMatrix(vals,r,c)), rows(r), cols(c){
 }
-
+Matrix::Matrix(): matrix(), rows(0), cols(0){
+}
 
 ostream& zich::operator<<(std::ostream& output, const Matrix& mat){
     for(size_t i = 0; i<mat.rows; i++){
@@ -34,6 +35,50 @@ ostream& zich::operator<<(std::ostream& output, const Matrix& mat){
         output << "[" << row << "]" << endl;
     }
     return output;
+}
+istream& zich::operator>>(std::istream& input, Matrix& mat){
+    int newRows;
+    int newCols;
+    cout<<"Rows; ";
+    input>>newRows;
+    cout<<"Cols; ";
+    input>>newCols;
+    vector<vector<double>> newMat;
+    for(size_t i = 0; i < newRows; i++){
+        vector<double> newRow;
+        size_t j=0;
+        double newVal; 
+        char c;
+        if(c != '\n'){
+            input >> c;
+            if (c == ','){
+                input >> c;
+            }
+        }
+        while(j < newCols && input.peek() != ']' && c != '\n'){
+            input >> newVal;
+            newRow.push_back(newVal);
+            j++;
+        }
+        while(j < newCols){
+            newRow.push_back(0);
+            j++;
+        }
+        //get rid of the rest of the input
+        while(c != ']' && c != '\n'){
+            input >> c;
+            if(input.peek() == '\n'){
+                c = '\n';
+            }
+            //cout << (int)c;
+
+        }
+        newMat.push_back(newRow);
+    }
+    mat.cols = newCols;
+    mat.rows = newRows;
+    mat.matrix = newMat;
+    return input;
 }
 
 Matrix zich::operator+(Matrix lMat, const Matrix& rMat){
